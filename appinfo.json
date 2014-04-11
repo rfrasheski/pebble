@@ -1,0 +1,18 @@
+{
+    "versionLabel": "1.0",
+    "uuid": "2299b9ae-7bb3-4012-bfec-32c333808f68",
+    "appKeys": {},
+    "longName": "devtest",
+    "versionCode": 1,
+    "capabilities": [
+        ""
+    ],
+    "shortName": "devtest",
+    "companyName": "rfrasheski@gmail.com",
+    "watchapp": {
+        "watchface": false
+    },
+    "resources": {
+        "media": []
+    }
+}

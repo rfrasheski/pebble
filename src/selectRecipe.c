@@ -1,25 +1,32 @@
-void config_provider(Window *window) {
- // single click / repeat-on-hold config:
-  window_single_click_subscribe(BUTTON_ID_DOWN, down_single_click_handler);
-}
-void down_single_click_handler(ClickRecognizerRef recognizer, void *context) {
-  Window *window = (Window *)context; // This context defaults to the window, but may be changed with \ref window_set_click_context.
-} 
+
+
+static SimpleMenuLayer *simple_menu_layer;
+static SimpleMenuSection menu_section[1];
+static SimpleMenuItem menu_items[5];
+static Window *window;
 
 static void call_back_for_item(int index, void *ctx){
 	menu_layer_reload_data(simple_menu_layer_get_menu_layer(simple_menu_layer));
 }
-static SimpleMenuLayer *simple_menu_layer;
-static SimpleMenuSection menu_section[1];
-static SimpleMenuItem menu_items[5];
-
+static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+  Window *window = (Window *)context;
+  // This context defaults to the window, but may be changed with \ref window_set_click_context.
+} 
+static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
+  Window *window = (Window *)context;
+}
+static void click_config_provider(Window *window) {
+ // single click / repeat-on-hold config:
+  window_single_click_subscribe(BUTTON_ID_SELECT, (ClickHandler) select_click_handler);
+  window_single_click_subscribe(BUTTON_ID_DOWN, (ClickHandler) down_click_handler);
+}
 void makeRecipeSelectWindow(int index) {
   
   GRect frame;
 	
 	window = window_create();
 	frame = layer_get_bounds(window_get_root_layer(window));
-  window_set_click_config_provider(&window, (ClickConfigProvider) config_provider);
+  window_set_click_config_provider(window, (ClickConfigProvider) click_config_provider);
   switch(index){
     case "Ethnic":
       menu_items[0] = (SimpleMenuItem){.title = "Asian-Chicken-Noodle-Soup", NULL, .callback = call_back_for_item,};
@@ -29,7 +36,7 @@ void makeRecipeSelectWindow(int index) {
 	    menu_items[4] = (SimpleMenuItem){.title = "Aloo-Gobi", NULL, .callback = call_back_for_item,};   
     
     break;
-    case : "Hord d'oeuvre"
+    case  "Hord d'oeuvre":
       menu_items[0] = (SimpleMenuItem){.title = "Joes-Screaming-Stuffed-Jalapeno-Poppers", NULL, .callback = call_back_for_item,};
 	    menu_items[1] = (SimpleMenuItem){.title = "Saucy-Asian-Meatballs", NULL, .callback = call_back_for_item,};
 	    menu_items[2] = (SimpleMenuItem){.title = "Crme-De-Brie-Apple-Pinwheels", NULL, .callback = call_back_for_item,};

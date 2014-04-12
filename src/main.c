@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include <selectRecipe.c>
 
 static SimpleMenuLayer *simple_menu_layer;
 static SimpleMenuSection menu_section[1];
@@ -10,15 +11,20 @@ static void call_back_for_item(int index, void *ctx){
  menu_layer_reload_data(simple_menu_layer_get_menu_layer(simple_menu_layer));
  }
 
-
-
+static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+  Window *window = (Window *)context;
+  makeRecipeSelectWindow();
+  // This context defaults to the window, but may be changed with \ref window_set_click_context.
+} 
+static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
+  Window *window = (Window *)context;
+}
 static void click_config_provider(Window *window) {
  // single click / repeat-on-hold config:
   window_single_click_subscribe(BUTTON_ID_SELECT, (ClickHandler) select_click_handler);
+  window_single_click_subscribe(BUTTON_ID_DOWN, (ClickHandler) down_click_handler);
 }
-static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  Window *window = (Window *)context; // This context defaults to the window, but may be changed with \ref window_set_click_context.
-} 
+
 
 
 void init(void){
@@ -36,7 +42,7 @@ void init(void){
 	menu_section[0] = (SimpleMenuSection){.items = menu_items, .num_items = 6, .title = "receipe gettera 91241",};
 	
 	simple_menu_layer = simple_menu_layer_create(frame, window, menu_section, 1, NULL);
-	window_set_click_config_provider(window, click_config_provider);
+	window_set_click_config_provider(window, (ClickConfigProvider) click_config_provider);
 
 	layer_add_child(window_get_root_layer(window), simple_menu_layer_get_layer(simple_menu_layer));
   

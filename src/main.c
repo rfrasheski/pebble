@@ -7,7 +7,9 @@ static SimpleMenuItem menu_items[6];
 
 static Window *window;
 
-
+static void call_back_for_item(int index, void *ctx){
+ menu_layer_reload_data(simple_menu_layer_get_menu_layer(simple_menu_layer));
+ }
 
 void makeCatWindow(){
   GRect frame;
@@ -30,7 +32,10 @@ void makeCatWindow(){
   
 	window_stack_push(window, true);
 }
-
+void config_provider(Window *window) {
+ // single click / repeat-on-hold config:
+  window_single_click_subscribe(BUTTON_ID_SELECT, select_single_click_handler);
+}
 
 
 

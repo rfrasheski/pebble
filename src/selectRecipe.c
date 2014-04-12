@@ -11,7 +11,7 @@ static void call_back_for_item(int index, void *ctx){
 }
 static SimpleMenuLayer *simple_menu_layer;
 static SimpleMenuSection menu_section[1];
-static SimpleMenuItem menu_items[6];
+static SimpleMenuItem menu_items[5];
 
 void makeRecipeSelectWindow(int index) {
   
@@ -21,55 +21,52 @@ void makeRecipeSelectWindow(int index) {
 	frame = layer_get_bounds(window_get_root_layer(window));
   window_set_click_config_provider(&window, (ClickConfigProvider) config_provider);
   switch(index){
-    case 0:
-      menu_items[0] = (SimpleMenuItem){.title = "Pasta", .subtitle = "for the pastafarians", NULL, .callback = call_back_for_item,};
-	    menu_items[1] = (SimpleMenuItem){.title = "Soup", .subtitle = "when don't feel chew", NULL, .callback = call_back_for_item,};
-	    menu_items[2] = (SimpleMenuItem){.title = "Salad", .subtitle = "is this even a food", NULL, .callback = call_back_for_item,};
-	    menu_items[3] = (SimpleMenuItem){.title = "Beef", .subtitle = "for cool kids", NULL, .callback = call_back_for_item,};
-	    menu_items[4] = (SimpleMenuItem){.title = "Chicken", .subtitle = "this was a bird", NULL, .callback = call_back_for_item,};
-	    menu_items[5] = (SimpleMenuItem){.title = "Kebab", .subtitle = "aria", NULL, .callback = call_back_for_item,};
-   
+    case "Ethnic":
+      menu_items[0] = (SimpleMenuItem){.title = "Asian-Chicken-Noodle-Soup", NULL, .callback = call_back_for_item,};
+	    menu_items[1] = (SimpleMenuItem){.title = "Cilantro-Chicken-and-Spicy-Thai-Noodles", NULL, .callback = call_back_for_item,};
+	    menu_items[2] = (SimpleMenuItem){.title = "Moroccan-Chicken-with-Green-Olives-and-Lemon", NULL, .callback = call_back_for_item,};
+	    menu_items[3] = (SimpleMenuItem){.title = "Collard-Greens-with-Lentils-Tomatoes-and-Indian-Spices", NULL, .callback = call_back_for_item,};
+	    menu_items[4] = (SimpleMenuItem){.title = "Aloo-Gobi", NULL, .callback = call_back_for_item,};   
     
     break;
-    case 1:
-      menu_items[0] = (SimpleMenuItem){.title = "Pasta", .subtitle = "for the pastafarians", NULL, .callback = call_back_for_item,};
-	    menu_items[1] = (SimpleMenuItem){.title = "Soup", .subtitle = "when don't feel chew", NULL, .callback = call_back_for_item,};
-	    menu_items[2] = (SimpleMenuItem){.title = "Salad", .subtitle = "is this even a food", NULL, .callback = call_back_for_item,};
-	    menu_items[3] = (SimpleMenuItem){.title = "Beef", .subtitle = "for cool kids", NULL, .callback = call_back_for_item,};
-	    menu_items[4] = (SimpleMenuItem){.title = "Chicken", .subtitle = "this was a bird", NULL, .callback = call_back_for_item,};
-	    menu_items[5] = (SimpleMenuItem){.title = "Kebab", .subtitle = "aria", NULL, .callback = call_back_for_item,};
+    case : "Hord d'oeuvre"
+      menu_items[0] = (SimpleMenuItem){.title = "Joes-Screaming-Stuffed-Jalapeno-Poppers", NULL, .callback = call_back_for_item,};
+	    menu_items[1] = (SimpleMenuItem){.title = "Saucy-Asian-Meatballs", NULL, .callback = call_back_for_item,};
+	    menu_items[2] = (SimpleMenuItem){.title = "Crme-De-Brie-Apple-Pinwheels", NULL, .callback = call_back_for_item,};
+	    menu_items[3] = (SimpleMenuItem){.title = "Chicken-Enchilada-Puffs", NULL, .callback = call_back_for_item,};
+	    menu_items[4] = (SimpleMenuItem){.title = "Spicy-Vegetable-Dip", NULL, .callback = call_back_for_item,};
+	    
     break;
-    case 2:
-      menu_items[0] = (SimpleMenuItem){.title = "Pasta", .subtitle = "for the pastafarians", NULL, .callback = call_back_for_item,};
-	    menu_items[1] = (SimpleMenuItem){.title = "Soup", .subtitle = "when don't feel chew", NULL, .callback = call_back_for_item,};
-	    menu_items[2] = (SimpleMenuItem){.title = "Salad", .subtitle = "is this even a food", NULL, .callback = call_back_for_item,};
-	    menu_items[3] = (SimpleMenuItem){.title = "Beef", .subtitle = "for cool kids", NULL, .callback = call_back_for_item,};
-	    menu_items[4] = (SimpleMenuItem){.title = "Chicken", .subtitle = "this was a bird", NULL, .callback = call_back_for_item,};
-	    menu_items[5] = (SimpleMenuItem){.title = "Kebab", .subtitle = "aria", NULL, .callback = call_back_for_item,};
+    case "Kid-Friendly":
+      menu_items[0] = (SimpleMenuItem){.title = "Potato-Casserole", NULL, .callback = call_back_for_item,};
+	    menu_items[1] = (SimpleMenuItem){.title = "Egg-Sandwich", NULL, .callback = call_back_for_item,};
+	    menu_items[2] = (SimpleMenuItem){.title = "Grilled-Cheese-Roast-Beef-Sandwiches", NULL, .callback = call_back_for_item,};
+	    menu_items[3] = (SimpleMenuItem){.title = "Bacon-and-Cheese-Stuffed-Chicken", NULL, .callback = call_back_for_item,};
+	    menu_items[4] = (SimpleMenuItem){.title = "Hot-Dog-Filled-Crescents", NULL, .callback = call_back_for_item,};
+	   
+      break;
+   case "Pasta":
+      menu_items[0] = (SimpleMenuItem){.title = "Pizza-Pasta", NULL, .callback = call_back_for_item,};
+	    menu_items[1] = (SimpleMenuItem){.title = "Pasta-Primavera", NULL, .callback = call_back_for_item,};
+	    menu_items[2] = (SimpleMenuItem){.title = "Pasta-with-Pesto", NULL, .callback = call_back_for_item,};
+	    menu_items[3] = (SimpleMenuItem){.title = "Pasta-Fagioli", NULL, .callback = call_back_for_item,};
+	    menu_items[4] = (SimpleMenuItem){.title = "Pasta-Salad", NULL, .callback = call_back_for_item,};   
+    
     break;
-    case 3:
-      menu_items[0] = (SimpleMenuItem){.title = "Pasta", .subtitle = "for the pastafarians", NULL, .callback = call_back_for_item,};
-	    menu_items[1] = (SimpleMenuItem){.title = "Soup", .subtitle = "when don't feel chew", NULL, .callback = call_back_for_item,};
-	    menu_items[2] = (SimpleMenuItem){.title = "Salad", .subtitle = "is this even a food", NULL, .callback = call_back_for_item,};
-	    menu_items[3] = (SimpleMenuItem){.title = "Beef", .subtitle = "for cool kids", NULL, .callback = call_back_for_item,};
-	    menu_items[4] = (SimpleMenuItem){.title = "Chicken", .subtitle = "this was a bird", NULL, .callback = call_back_for_item,};
-	    menu_items[5] = (SimpleMenuItem){.title = "Kebab", .subtitle = "aria", NULL, .callback = call_back_for_item,};
+    case "Salads":
+      menu_items[0] = (SimpleMenuItem){.title = "Green-Salad-with-Cranberry-Vinaigrette", NULL, .callback = call_back_for_item,};
+	    menu_items[1] = (SimpleMenuItem){.title = "Spinach-Salad-with-Orzo-and-Feta", NULL, .callback = call_back_for_item,};
+	    menu_items[2] = (SimpleMenuItem){.title = "Buffalo-Style-Chicken-Salad", NULL, .callback = call_back_for_item,};
+	    menu_items[3] = (SimpleMenuItem){.title = "Cindys-Grilled-Salad", NULL, .callback = call_back_for_item,};
+	    menu_items[4] = (SimpleMenuItem){.title = "Ceasar-Salad", NULL, .callback = call_back_for_item,};
+	   
     break;
-    case 4:
-      menu_items[0] = (SimpleMenuItem){.title = "Pasta", .subtitle = "for the pastafarians", NULL, .callback = call_back_for_item,};
-	    menu_items[1] = (SimpleMenuItem){.title = "Soup", .subtitle = "when don't feel chew", NULL, .callback = call_back_for_item,};
-	    menu_items[2] = (SimpleMenuItem){.title = "Salad", .subtitle = "is this even a food", NULL, .callback = call_back_for_item,};
-	    menu_items[3] = (SimpleMenuItem){.title = "Beef", .subtitle = "for cool kids", NULL, .callback = call_back_for_item,};
-	    menu_items[4] = (SimpleMenuItem){.title = "Chicken", .subtitle = "this was a bird", NULL, .callback = call_back_for_item,};
-	    menu_items[5] = (SimpleMenuItem){.title = "Kebab", .subtitle = "aria", NULL, .callback = call_back_for_item,};
-    break;
-    case 5:
-      menu_items[0] = (SimpleMenuItem){.title = "Pasta", .subtitle = "for the pastafarians", NULL, .callback = call_back_for_item,};
-	    menu_items[1] = (SimpleMenuItem){.title = "Soup", .subtitle = "when don't feel chew", NULL, .callback = call_back_for_item,};
-	    menu_items[2] = (SimpleMenuItem){.title = "Salad", .subtitle = "is this even a food", NULL, .callback = call_back_for_item,};
-	    menu_items[3] = (SimpleMenuItem){.title = "Beef", .subtitle = "for cool kids", NULL, .callback = call_back_for_item,};
-	    menu_items[4] = (SimpleMenuItem){.title = "Chicken", .subtitle = "this was a bird", NULL, .callback = call_back_for_item,};
-	    menu_items[5] = (SimpleMenuItem){.title = "Kebab", .subtitle = "aria", NULL, .callback = call_back_for_item,};
+    case "Soups":
+      menu_items[0] = (SimpleMenuItem){.title = "Helens-Lentil-Soup", NULL, .callback = call_back_for_item,};
+	    menu_items[1] = (SimpleMenuItem){.title = "Boracho-Bean-Soup-or-Frijoles-a-La-Charra-Restaurant-Style", NULL, .callback = call_back_for_item,};
+	    menu_items[2] = (SimpleMenuItem){.title = "Hearty-White-Bean-Soup", NULL, .callback = call_back_for_item,};
+	    menu_items[3] = (SimpleMenuItem){.title = "Ham-Bean-Soup", NULL, .callback = call_back_for_item,};
+	    menu_items[4] = (SimpleMenuItem){.title = "Easy-Bean-Soup-aka-Petras-Kitchen-Sink-Soup", NULL, .callback = call_back_for_item,};
     break;
   }
   

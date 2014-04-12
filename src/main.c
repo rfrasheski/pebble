@@ -2,8 +2,7 @@
 
 static SimpleMenuLayer *simple_menu_layer;
 static SimpleMenuSection menu_section[1];
-static SimpleMenuItem menu_items[6];
-
+static SimpleMenuItem menu_items[6]; 
 
 static Window *window;
 
@@ -11,8 +10,19 @@ static void call_back_for_item(int index, void *ctx){
  menu_layer_reload_data(simple_menu_layer_get_menu_layer(simple_menu_layer));
  }
 
-void makeCatWindow(){
-  GRect frame;
+
+
+static void click_config_provider(Window *window) {
+ // single click / repeat-on-hold config:
+  window_single_click_subscribe(BUTTON_ID_SELECT, (ClickHandler) select_click_handler);
+}
+static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+  Window *window = (Window *)context; // This context defaults to the window, but may be changed with \ref window_set_click_context.
+} 
+
+
+void init(void){
+	GRect frame;
 	
 	window = window_create();
 	frame = layer_get_bounds(window_get_root_layer(window));
@@ -26,21 +36,14 @@ void makeCatWindow(){
 	menu_section[0] = (SimpleMenuSection){.items = menu_items, .num_items = 6, .title = "receipe gettera 91241",};
 	
 	simple_menu_layer = simple_menu_layer_create(frame, window, menu_section, 1, NULL);
-	
+	window_set_click_config_provider(window, click_config_provider);
+
 	layer_add_child(window_get_root_layer(window), simple_menu_layer_get_layer(simple_menu_layer));
-  window_set_click_config_provider(&window, (ClickConfigProvider) config_provider);
   
 	window_stack_push(window, true);
-}
-void config_provider(Window *window) {
- // single click / repeat-on-hold config:
-  window_single_click_subscribe(BUTTON_ID_SELECT, select_single_click_handler);
-}
 
+  
 
-
-void init(void){
-	makeCatWindow(); 
 }
 
 void deinit(void) {

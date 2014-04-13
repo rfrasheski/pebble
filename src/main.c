@@ -13,16 +13,25 @@ static void call_back_for_item(int index, void *ctx){
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   Window *window = (Window *)context;
-  makeRecipeSelectWindow();
   // This context defaults to the window, but may be changed with \ref window_set_click_context.
 } 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
   Window *window = (Window *)context;
+  if((int)simple_menu_layer_get_selected_index(simple_menu_layer)<6){
+    simple_menu_layer_set_selected_index(simple_menu_layer,(int)simple_menu_layer_get_selected_index(simple_menu_layer) + 1, true);
+  }
+}
+static void up_click_handler(ClickRecognizerRef recognizer, void *context){
+   Window *window = (Window *)context;
+  if((int)simple_menu_layer_get_selected_index(simple_menu_layer)>0){
+    simple_menu_layer_set_selected_index(simple_menu_layer,(int)simple_menu_layer_get_selected_index(simple_menu_layer) - 1, true);
+  }
 }
 static void click_config_provider(Window *window) {
  // single click / repeat-on-hold config:
   window_single_click_subscribe(BUTTON_ID_SELECT, (ClickHandler) select_click_handler);
   window_single_click_subscribe(BUTTON_ID_DOWN, (ClickHandler) down_click_handler);
+  window_single_click_subscribe(BUTTON_ID_UP, (ClickHandler) up_click_handler);
 }
 
 

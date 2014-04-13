@@ -3,44 +3,30 @@
 static SimpleMenuLayer *simple_menu_layer;
 static SimpleMenuSection menu_section[1];
 static SimpleMenuItem menu_items[6]; 
+static SimpleMenuLayer *simple_menu_layer2;
+static SimpleMenuSection menu_section2[1];
+static SimpleMenuItem menu_items2[6]; 
+static void catwindow(int index, void* context);
 
 static Window *window;
+static Window *window2;
 
 void call_back_for_item(int index, void *ctx){
- menu_layer_reload_data(simple_menu_layer_get_menu_layer(simple_menu_layer));
+     menu_layer_reload_data(simple_menu_layer_get_menu_layer(simple_menu_layer));
  }
 
 
-void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  Window *window = (Window *)context;
-  makeRecipeSelectWindow((int)simple_menu_layer_get_selected_index(simple_menu_layer));
-  // This context defaults to the window, but may be changed with \ref window_set_click_context.
-} 
-void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-  Window *window = (Window *)context;
-  if((int)simple_menu_layer_get_selected_index(simple_menu_layer)<6){
-    simple_menu_layer_set_selected_index(simple_menu_layer,(int)simple_menu_layer_get_selected_index(simple_menu_layer) + 1, true);
-  }
+void makeRecipeWindow(int index){
+  
 }
-void up_click_handler(ClickRecognizerRef recognizer, void *context){
-   Window *window = (Window *)context;
-  if((int)simple_menu_layer_get_selected_index(simple_menu_layer)>0){
-    simple_menu_layer_set_selected_index(simple_menu_layer,(int)simple_menu_layer_get_selected_index(simple_menu_layer) - 1, true);
-  }
-}
-void click_config_provider(Window *window) {
- // single click / repeat-on-hold config:
-  window_single_click_subscribe(BUTTON_ID_SELECT, (ClickHandler) select_click_handler);
-  window_single_click_subscribe(BUTTON_ID_DOWN, (ClickHandler) down_click_handler);
-  window_single_click_subscribe(BUTTON_ID_UP, (ClickHandler) up_click_handler);
-}
+
+
 void makeRecipeSelectWindow(int index) {
   
   GRect frame;
-	
-	window = window_create();
-	frame = layer_get_bounds(window_get_root_layer(window));
-  window_set_click_config_provider(window, (ClickConfigProvider) click_config_provider);
+  
+	window2 = window_create();
+	frame = layer_get_bounds(window_get_root_layer(window2));
   switch(index){
     case 0:
       menu_items[0] = (SimpleMenuItem){.title = "Asian-Chicken-Noodle-Soup", NULL, .callback = call_back_for_item,};
@@ -91,34 +77,33 @@ void makeRecipeSelectWindow(int index) {
     break;
     
   }
-  menu_section[0] = (SimpleMenuSection){.items = menu_items, .num_items = 6, .title = "receipe gettera 91241",};
+  menu_section2[0] = (SimpleMenuSection){.items = menu_items, .num_items = 6, .title = "receipe gettera 91241",};
 	
-	simple_menu_layer = simple_menu_layer_create(frame, window, menu_section, 1, NULL);
-	window_set_click_config_provider(window, (ClickConfigProvider) click_config_provider);
+	simple_menu_layer2 = simple_menu_layer_create(frame, window2, menu_section2, 1, NULL);
 
-	layer_add_child(window_get_root_layer(window), simple_menu_layer_get_layer(simple_menu_layer));
+	layer_add_child(window_get_root_layer(window2), simple_menu_layer_get_layer(simple_menu_layer2));
   
-	window_stack_push(window, true);
+	window_stack_push(window2, true);
   
 }
-
+void call_back_cat(int index, void *ctx){
+  makeRecipeSelectWindow(index);
+}
 
 void init(void){
 	GRect frame;
-	
 	window = window_create();
 	frame = layer_get_bounds(window_get_root_layer(window));
-	menu_items[0] = (SimpleMenuItem){.title = "Pasta", .subtitle = "for the pastafarians", NULL, .callback = call_back_for_item,};
-	menu_items[1] = (SimpleMenuItem){.title = "Soup", .subtitle = "when don't feel chew", NULL, .callback = call_back_for_item,};
-	menu_items[2] = (SimpleMenuItem){.title = "Salad", .subtitle = "is this even a food", NULL, .callback = call_back_for_item,};
-	menu_items[3] = (SimpleMenuItem){.title = "Beef", .subtitle = "for cool kids", NULL, .callback = call_back_for_item,};
-	menu_items[4] = (SimpleMenuItem){.title = "Chicken", .subtitle = "this was a bird", NULL, .callback = call_back_for_item,};
-	menu_items[5] = (SimpleMenuItem){.title = "Kebab", .subtitle = "aria", NULL, .callback = call_back_for_item,};
+	menu_items[0] = (SimpleMenuItem){.title = "Ethnic", .subtitle = "for the pastafarians", NULL, .callback = call_back_cat,};
+	menu_items[1] = (SimpleMenuItem){.title = "Hors d'oeuvre", .subtitle = "when don't feel chew", NULL, .callback = call_back_cat,};
+	menu_items[2] = (SimpleMenuItem){.title = "Kid-Friendly", .subtitle = "is this even a food", NULL, .callback = call_back_cat,};
+	menu_items[3] = (SimpleMenuItem){.title = "Pasta", .subtitle = "for cool kids", NULL, .callback = call_back_cat,};
+	menu_items[4] = (SimpleMenuItem){.title = "Salad", .subtitle = "this was a bird", NULL, .callback = call_back_cat,};
+	menu_items[5] = (SimpleMenuItem){.title = "Soups", .subtitle = "aria", NULL, .callback = call_back_cat,};
 
 	menu_section[0] = (SimpleMenuSection){.items = menu_items, .num_items = 6, .title = "receipe gettera 91241",};
 	
 	simple_menu_layer = simple_menu_layer_create(frame, window, menu_section, 1, NULL);
-	window_set_click_config_provider(window, (ClickConfigProvider) click_config_provider);
 
 	layer_add_child(window_get_root_layer(window), simple_menu_layer_get_layer(simple_menu_layer));
   
